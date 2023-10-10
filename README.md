@@ -2,29 +2,41 @@
 
 #### Notes for capabilities if run Selenium node
 
+
+Start Selenium hub
+
+`java -jar selenium-server-standalone-3.141.59.jar -role hub`
+
+Start Selenium node
+`java -jar selenium-server-standalone-3.141.59.jar -role node -nodeConfig app.json`
+
+app.json
 ```
 {
-  "capabilities": [
+  "capabilities":
+  [
     {
       "browserName": "chrome",
-      "maxInstances": 1,
-      "seleniumProtocol": "WebDriver",
-      "chromeOptions": {
-        "binary": "app_path.exe",
-        "args": [
-          "--ignore-certificate-errors",
-          "remote-debugging-port=9515",
-          "--start-maximized"
-        ]
-      }
+	    "platformName": "WINDOWS",
+      "maxInstances": 5,
+      "seleniumProtocol": "WebDriver"
     }
   ],
   "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
-  "maxSession": 1,
+  "maxSession": 5,
   "port": 5555,
   "register": true,
   "registerCycle": 5000,
-  "hub": "http://localhost:4444"
+  "hub": "http://localhost:4444",
+  "nodeStatusCheckTimeout": 5000,
+  "nodePolling": 5000,
+  "role": "node",
+  "unregisterIfStillDownAfter": 60000,
+  "downPollingLimit": 2,
+  "debug": false,
+  "servlets" : [],
+  "withoutServlets": [],
+  "custom": {}
 }
 ```
 
